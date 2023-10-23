@@ -1,6 +1,8 @@
 import React, { ChangeEvent, useState } from "react";
 import "./App.css";
 
+const API_KEY = process.env.REACT_APP_OPENWEATHER_API_KEY;
+
 type City = {
   country: string;
   lat: number;
@@ -12,7 +14,7 @@ type City = {
 function App() {
   const [query, setQuery] = useState<string>("");
   const [searchResults, setSearchResults] = useState<City[]>([]);
-  const API_KEY = process.env.REACT_APP_OPENWEATHER_API_KEY;
+  const [selected, setSelected] = useState<City[]>([]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
@@ -37,6 +39,10 @@ function App() {
       });
   };
 
+  const selectCity = (city: City) => {
+    setSelected([...selected, city]);
+  };
+
   return (
     <div className="App">
       <header className="App-header">
@@ -52,9 +58,13 @@ function App() {
               searchResults.map((city) => (
                 <li
                   key={`${city.lat}-${city.lon}`}
-                >{`${city.name} - ${city.country}`}</li>
+                  onClick={() => selectCity(city)}
+                >{`${city.name} - ${city.country} | ${city.lat}, ${city.lon}`}</li>
               ))}
           </ul>
+        </div>
+        <div data-testid="my-weather-list">
+          {selected && selected.map((city) => <p>{city.name}</p>)}
         </div>
       </header>
     </div>
