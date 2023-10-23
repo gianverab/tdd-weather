@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen, waitFor, within } from "@testing-library/react";
-import App from "./App";
+import App from "./WeatherApp";
 import { Server } from "miragejs";
 import { createMockServer } from "./createMockServer";
 import userEvent from "@testing-library/user-event";
