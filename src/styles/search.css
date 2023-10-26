@@ -1,0 +1,38 @@
+.input-container {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.input-container input {
+  padding: 0.4rem 1rem;
+  width: 100%;
+}
+
+.input-container button {
+  padding: 0.4rem 1rem;
+}
+
+.search-results {
+  margin: 1rem 0;
+  padding-left: 0;
+}
+
+.search-result {
+  padding: 0.2rem 0;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-left: 0;
+}
+
+.search-result:hover {
+  background-color: #efefef;
+}
+
+.city-location {
+  margin-left: auto;
+  color: #ccc;
+}

@@ -65,5 +65,9 @@ describe("Weather Application", () => {
     expect(
       within(screen.getByTestId("my-weather-list")).getByText(/Melbourne/i)
     ).toBeInTheDocument();
+
+    expect(
+      within(screen.getByTestId("search-results")).queryByText(/Melbourne/i)
+    ).not.toBeInTheDocument();
   });
 });

@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useState } from "react";
 import { City } from "../types";
 import { SearchProps } from "../types/ui";
+import "../styles/search.css";
 
 const API_KEY = process.env.REACT_APP_OPENWEATHER_API_KEY;
 
@@ -34,25 +35,42 @@ const Search: React.FC<SearchProps> = ({ selectedCity, onSelectCity }) => {
     onSelectCity([...selectedCity, city]);
   };
 
-  return (
-    <>
-      <input type="text" data-testid="search-input" onChange={handleChange} />
-      <button data-testid="search-button" onClick={handleClick}>
-        Search
-      </button>
+  const handleSelect = (city: City) => {
+    selectCity(city);
+    setSearchResults([]);
+  };
 
+  return (
+    <div className="search-container">
+      <div className="input-container">
+        <input
+          type="text"
+          data-testid="search-input"
+          onChange={handleChange}
+          placeholder="Enter city name (e.g. Melbourne, New York)"
+        />
+        <button data-testid="search-button" onClick={handleClick}>
+          Search
+        </button>
+      </div>
       <div data-testid="search-results">
-        <ul>
+        <ul className="search-results">
           {searchResults &&
             searchResults.map((city) => (
               <li
+                className="search-result"
                 key={`${city.lat}-${city.lon}`}
-                onClick={() => selectCity(city)}
-              >{`${city.name} - ${city.country} | ${city.lat}, ${city.lon}`}</li>
+                onClick={() => handleSelect(city)}
+              >
+                <span className="city-name">
+                  {city.name}, {city.country}{" "}
+                </span>
+                <span className="city-location">{`${city.lat}, ${city.lon}`}</span>
+              </li>
             ))}
         </ul>
       </div>
-    </>
+    </div>
   );
 };
 
