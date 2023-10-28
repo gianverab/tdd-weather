@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useRef, useState } from "react";
 import { City } from "../types";
 import { SearchProps } from "../types/ui";
 import "../styles/search.css";
@@ -8,6 +8,8 @@ const API_KEY = process.env.REACT_APP_OPENWEATHER_API_KEY;
 const Search: React.FC<SearchProps> = ({ selectedCity, onSelectCity }) => {
   const [query, setQuery] = useState<string>("");
   const [searchResults, setSearchResults] = useState<City[]>([]);
+
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
@@ -29,6 +31,9 @@ const Search: React.FC<SearchProps> = ({ selectedCity, onSelectCity }) => {
           }))
         );
       });
+    if (inputRef.current) {
+      inputRef.current.value = "";
+    }
   };
 
   const selectCity = (city: City) => {
@@ -48,6 +53,7 @@ const Search: React.FC<SearchProps> = ({ selectedCity, onSelectCity }) => {
           data-testid="search-input"
           onChange={handleChange}
           placeholder="Enter city name (e.g. Melbourne, New York)"
+          ref={inputRef}
         />
         <button data-testid="search-button" onClick={handleClick}>
           Search

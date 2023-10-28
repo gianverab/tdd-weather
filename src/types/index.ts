@@ -5,3 +5,7 @@ export type City = {
   name: string;
   state: string;
 };
+
+export type Weather = {
+  temp: number;
+};

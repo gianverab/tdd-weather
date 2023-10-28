@@ -8,3 +8,7 @@ export interface SearchProps {
 export interface WeatherListProps {
   selectedCity: City[];
 }
+
+export interface WeatherCardProps {
+  city: City;
+}

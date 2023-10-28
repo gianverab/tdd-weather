@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen, waitFor, within } from "@testing-library/react";
-import App from "./WeatherApp";
+import WeatherApp from "./WeatherApp";
 import { Server } from "miragejs";
 import { createMockServer } from "./createMockServer";
 import userEvent from "@testing-library/user-event";
@@ -12,13 +12,13 @@ describe("Weather Application", () => {
   afterEach(() => server.shutdown());
 
   it("renders title", () => {
-    render(<App />);
+    render(<WeatherApp />);
     const text = screen.getByText(/Weather Application/i);
     expect(text).toBeInTheDocument();
   });
 
   it("shows search results", async () => {
-    render(<App />);
+    render(<WeatherApp />);
 
     const input = screen.getByTestId("search-input");
     userEvent.type(input, "Melbourne");
@@ -32,7 +32,7 @@ describe("Weather Application", () => {
   });
 
   it("shows search results details", async () => {
-    render(<App />);
+    render(<WeatherApp />);
 
     const input = screen.getByTestId("search-input");
     userEvent.type(input, "Melbourne");
@@ -47,7 +47,7 @@ describe("Weather Application", () => {
   });
 
   it("add search result to my weather list", async () => {
-    render(<App />);
+    render(<WeatherApp />);
 
     const input = screen.getByTestId("search-input");
     userEvent.type(input, "Melbourne");
