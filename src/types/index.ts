@@ -6,6 +6,7 @@ export type City = {
   state: string;
 };
 
-export type Weather = {
+export type WeatherData = {
   temp: number;
+  main: string;
 };

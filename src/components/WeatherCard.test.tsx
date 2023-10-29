@@ -33,4 +33,9 @@ describe("Weathercard", () => {
     render(<WeatherCard city={city} />);
     await screen.findByText(25.47);
   });
+
+  it("renders weather information", async () => {
+    render(<WeatherCard city={city} />);
+    await screen.findByText("Clouds");
+  });
 });

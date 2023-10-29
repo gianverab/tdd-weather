@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { WeatherCardProps } from "../types/ui";
-import { Weather } from "../types";
+import { WeatherData } from "../types";
 
 const WeatherCard: React.FC<WeatherCardProps> = ({ city }) => {
-  const [weather, setWeather] = useState<Weather>();
+  const [weather, setWeather] = useState<WeatherData>();
 
   useEffect(() => {
     fetch(
@@ -11,15 +11,19 @@ const WeatherCard: React.FC<WeatherCardProps> = ({ city }) => {
     )
       .then((res) => res.json())
       .then((data) => {
-        setWeather({ temp: data.main.temp });
+        setWeather({
+          temp: data.main.temp,
+          main: data.weather[0].main,
+        });
         console.log(data);
       });
   }, [city]);
 
   return (
-    <div data-testid="weather-data">
+    <div>
       <h3>{city.name}</h3>
-      <p>{weather ? weather.temp : "-/-"}</p>
+      <p data-testid="weather-temp">{weather ? weather.temp : "-/-"}</p>
+      <p data-testid="weather-main">{weather && weather.main}</p>
     </div>
   );
 };
